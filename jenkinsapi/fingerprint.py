@@ -65,7 +65,7 @@ class Fingerprint(JenkinsBase):
 
         return True
 
-    def validate_for_build(self, filename, job, build):
+    def validate_for_build(self, filename, job, build, strict_validation):
         if not self.valid():
             log.info("Unknown to jenkins.")
             return False
@@ -76,7 +76,7 @@ class Fingerprint(JenkinsBase):
             if self._data["original"]["name"] == job:
                 if self._data["original"]["number"] == build:
                     return True
-        if self._data["fileName"] != filename:
+        if strict_validation and (self._data["fileName"] != filename):
             log.info(
                 msg="Filename from jenkins (%s) did not match provided (%s)" %
                 (self._data["fileName"], filename))

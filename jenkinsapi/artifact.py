@@ -94,7 +94,7 @@ class Artifact(object):
             local_md5,
             self.build.job.jenkins)
         valid = fp.validate_for_build(
-            os.path.basename(fspath), self.build.job.name, self.build.buildno)
+            os.path.basename(fspath), self.build.job.name, self.build.buildno, strict_validation)
         if not valid or (fp.unknown and strict_validation):  # strict = 404 as invalid
             raise ArtifactBroken("Artifact %s seems to be broken, check %s" % (local_md5, baseurl))
         return True
