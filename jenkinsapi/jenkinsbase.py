@@ -87,7 +87,7 @@ class JenkinsBase(object):
             return ast.literal_eval(self.get_raw_data(url,params,tree))
         except Exception:
             logging.exception('Inappropriate content found at %s', url)
-            raise JenkinsAPIException('Cannot parse %s' % response.content)
+            raise JenkinsAPIException('Inappropriate content found at %s' % url)
 
     def pprint(self):
         """
